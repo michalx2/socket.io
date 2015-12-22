@@ -1625,7 +1625,7 @@ describe('socket.io', function(){
         var socket = client(srv);
         sio.on('connection', function(s){
           s.conn.on('upgrade', function(){
-            console.log('\033[96mNote: warning expected and normal in test.\033[39m');
+            console.log('\u001b[96mNote: warning expected and normal in test.\u001b[39m');
             socket.io.engine.write('5woooot');
             setTimeout(function(){
               done();
