@@ -15,7 +15,7 @@ function client(srv, nsp, opts){
   }
   let addr = srv.address();
   if (!addr) addr = srv.listen().address();
-  let url = 'ws://localhost:' + addr.port + (nsp || '');
+  let url = `ws://localhost:${addr.port}${nsp || ''}`;
   return ioc(url, opts);
 }
 
@@ -392,7 +392,7 @@ describe('socket.io', () => {
       let net    = require('net');
       let server = net.createServer();
 
-      let clientSocket = ioc('ws://0.0.0.0:' + PORT);
+      let clientSocket = ioc(`ws://0.0.0.0:${PORT}`);
 
       clientSocket.on('disconnect', () => {
         expect(Object.keys(sio.nsps['/'].sockets).length).to.equal(0);
@@ -1496,7 +1496,7 @@ describe('socket.io', () => {
       let sio = new io(srv);
       srv.listen(() => {
         let addr = srv.listen().address();
-        let url = 'ws://localhost:' + addr.port + '?key1=1&key2=2';
+        let url = `ws://localhost:${addr.port}?key1=1&key2=2`;
         let socket = ioc(url);
         sio.on('connection', s => {
           let parsed = require('url').parse(s.request.url);
